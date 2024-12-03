@@ -45,31 +45,7 @@ const CommentSection = () => {
                     </div>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error, deserunt? Deleniti, vel veniam itaque quibusdam ipsam animi.</p>
                 </div>
-{/* 
-                <div className='flex flex-col gap-1'>
-                    <div className='flex gap-2'>
-                        <img className='h-7 aspect-square rounded-full object-cover my-auto' src="https://www.wearegecko.co.uk/media/50316/mountain-3.jpg" alt="comment image" />
-                        <div >
-                            <p className='text-sm'>Nishant Subedi</p>
-                            <p className='text-xs text-gray-400'>{new Date().toDateString()}</p>
-                        </div>
-                    </div>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero similique vel facere ea praesentium repellat animi consequatur accusantium voluptate odit.</p>
-                </div>
-
-                <div className='flex flex-col gap-1'>
-                    <div className='flex gap-2'>
-                        <img className='h-7 aspect-square rounded-full object-cover my-auto' src="https://www.wearegecko.co.uk/media/50316/mountain-3.jpg" alt="comment image" />
-                        <div >
-                            <p className='text-sm'>Pallav Bastola</p>
-                            <p className='text-xs text-gray-400'>{new Date().toDateString()}</p>
-                        </div>
-                    </div>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut laudantium vitae sed ab! Deserunt iusto a voluptate vel voluptas, dolorem quod atque, necessitatibus dolorum, exercitationem illum? Recusandae officiis amet quidem.</p>
-                </div> */}
-
             </div>
-
         </div>
     )
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button } from '../ui/button'
 import { Switch } from '../ui/switch'
+import Link from 'next/link'
 
 const Navbar = () => {
     return (
@@ -12,7 +13,7 @@ const Navbar = () => {
                     <li className='my-auto cursor-pointer'>Home</li>
                     <li className='my-auto cursor-pointer'>Contact</li>
                     <li className='my-auto cursor-pointer'>About</li>
-                    <li><Button className='rounded-full bg-lime-400 hover:bg-lime-500 text-black font-semibold'>Login</Button></li>
+                    <li><Link href="/login"><Button className='rounded-full bg-lime-400 hover:bg-lime-500 text-black font-semibold'>Login</Button></Link></li>
                 </ul>
             </div>
         </div>
