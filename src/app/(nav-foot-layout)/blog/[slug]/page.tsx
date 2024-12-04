@@ -1,10 +1,12 @@
 import EditorsChoice from '@/components/Others/EditorsChoice'
 import Trending from '@/components/Others/Trending'
 import { Button } from '@/components/ui/button'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import CommentSection from './components/CommentSection'
 
 const BlogPage = () => {
+
+
     return (
         <>
             <div className='flex py-4'>
@@ -14,7 +16,7 @@ const BlogPage = () => {
                         <img className='rounded-full aspect-square h-10 object-cover' src="https://www.wearegecko.co.uk/media/50316/mountain-3.jpg" alt="image 5" />
                         <div>
                             <p>Prabin Acharya</p>
-                            <p className='text-xs text-gray-400'>{new Date().toDateString()}</p>
+                            <p className='text-xs text-gray-400'>DEC 4 2024</p>
                         </div>
                     </div>
                 </div>

@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button } from '../ui/button'
 import Trending from '../Others/Trending'
 import EditorsChoice from '../Others/EditorsChoice'
@@ -17,7 +17,7 @@ const PostsContainer = () => {
                         <div key={index} className='flex gap-7'>
                             <img className='w-[40%] object-cover rounded-lg' src="https://www.wearegecko.co.uk/media/50316/mountain-3.jpg" alt="image 2" />
                             <div className='min-h-full flex flex-col justify-between flex-1'>
-                                <p className='text-sm text-gray-400'>{new Date().toDateString()}</p>
+                                <p className='text-sm text-gray-400'>DEC 4 2024</p>
                                 <div>
                                     <p className='text-xl font-semibold'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus laudantium aliquam voluptates!</p>
                                     <p className='text-sm line-clamp-3 text-gray-400'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis pariatur magni voluptas
