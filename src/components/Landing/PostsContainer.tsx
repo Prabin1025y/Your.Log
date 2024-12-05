@@ -1,10 +1,29 @@
 import Link from 'next/link'
-import React, { useEffect, useState } from 'react'
 import { Button } from '../ui/button'
 import Trending from '../Others/Trending'
 import EditorsChoice from '../Others/EditorsChoice'
+import { Post } from '../../../types/types'
+import PageControls from './PageControls'
 
-const PostsContainer = () => {
+const getData = async (page: number, cat: string) => {
+    const res = await fetch(`http://localhost:3000/api/posts?page=${page}&cat=${cat || ""}`, { cache: "no-store" });
+
+    if (!res.ok)
+        return alert("Error");
+
+    const data = await res.json();
+
+    if (!data.success)
+        return alert(data.message);
+
+    return data;
+}
+const PostsContainer = async ({ page, cat }: { page: number, cat: string }) => {
+    const { posts, count } = await getData(page, cat);
+
+    const POST_PER_PAGE = 4;
+    const hasPrev = POST_PER_PAGE * (page - 1) > 0;
+    const hasNext = (POST_PER_PAGE * (page - 1)) + POST_PER_PAGE < count;
 
     return (
         <div className='flex gap-5'>
@@ -13,15 +32,14 @@ const PostsContainer = () => {
                     Recent Posts
                 </h3>
                 <div className='flex flex-col gap-12'>
-                    {Array.from({ length: 5 }).map((post, index) => (
-                        <div key={index} className='flex gap-7'>
-                            <img className='w-[40%] object-cover rounded-lg' src="https://www.wearegecko.co.uk/media/50316/mountain-3.jpg" alt="image 2" />
-                            <div className='min-h-full flex flex-col justify-between flex-1'>
-                                <p className='text-sm text-gray-400'>DEC 4 2024</p>
+                    {posts?.map((post: Post, index: number) => (
+                        <div className='flex gap-7'>
+                            <img className='w-[40%] object-cover rounded-lg' src={post.image} alt="image 2" />
+                            <div className='min-h-full flex flex-col  flex-1'>
+                                <p className='text-sm text-gray-400'>{post.createdAt.toString().split("T")[0]}</p>
                                 <div>
-                                    <p className='text-xl font-semibold'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus laudantium aliquam voluptates!</p>
-                                    <p className='text-sm line-clamp-3 text-gray-400'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis pariatur magni voluptas
-                                        saepe, dolor facere nulla odit ex hic assumenda id provident quisquam enim, voluptatem distinctio. Aliquam doloribus voluptas rerum...</p>
+                                    <p className='text-xl font-semibold'>{post.title}</p>
+                                    <p className='text-sm line-clamp-3 text-gray-400'>{post.content}</p>
                                 </div>
                                 <Link href="/" className='cursor-pointer underline5 text-gray-400' ><span className='border-b border-red-500'>Read More</span></Link>
                             </div>
@@ -29,10 +47,7 @@ const PostsContainer = () => {
                     ))}
 
                 </div>
-                <div className='flex justify-between my-6'>
-                    <Button className='w-24'>Previous</Button>
-                    <Button className='w-24'>Next</Button>
-                </div>
+                <PageControls page={page} hasPrev={hasPrev} hasNext={hasNext} />
             </div>
 
 

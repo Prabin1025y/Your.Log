@@ -26,7 +26,7 @@ const Navbar = () => {
                     {status === "authenticated" ?
                         <HoverCard>
                             <HoverCardTrigger>
-                                <img className='h-12 rounded-full border-2 border-lime-400 cursor-pointer' src={data?.user?.image || ""} alt="image" />
+                                <img className='h-12 rounded-full border-2 border-lime-400 cursor-pointer' src={data?.user?.image || "https://i0.wp.com/florrycreativecare.com/wp-content/uploads/2020/08/blank-profile-picture-mystery-man-avatar-973460.jpg?ssl=1"} alt="image" />
                             </HoverCardTrigger>
                             <HoverCardContent className='bg-[#181C14]'>
                                 <Button onClick={() => signOut()} className='w-full bg-transparent justify-start shadow-none hover:bg-[#3C3D37]' ><LogOut />Log Out</Button>

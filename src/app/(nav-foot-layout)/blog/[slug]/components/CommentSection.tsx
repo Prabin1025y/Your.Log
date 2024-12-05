@@ -1,9 +1,23 @@
 
 import { Button } from '@/components/ui/button'
-import React, { useEffect, useState } from 'react'
+import { Comment } from '../../../../../../types/types';
 
-const CommentSection = () => {
+const getData = async (slug: string) => {
+    const res = await fetch(`http://localhost:3000/api/comments?postSlug=${slug}`);
 
+    if (!res.ok)
+        return alert("Error");
+
+    const data = await res.json();
+
+    if (!data.success)
+        return alert(data.message);
+
+    return data.comments;
+}
+
+const CommentSection = async ({ slug }: { slug: string }) => {
+    const comments: Comment[] = await getData(slug);
     return (
         <div>
             <h3 className='text-xl text-lime-400 font-semibold my-3'>
@@ -14,39 +28,18 @@ const CommentSection = () => {
                 <Button>Post</Button>
             </div>
             <div className='flex flex-col gap-12'>
-
-                <div className='flex flex-col gap-1'>
-                    <div className='flex gap-2'>
-                        <img className='h-7 aspect-square rounded-full object-cover my-auto' src="https://www.wearegecko.co.uk/media/50316/mountain-3.jpg" alt="comment image" />
-                        <div >
-                            <p className='text-sm'>Prabin Acharya</p>
-                            <p className='text-xs text-gray-400'>DEC 4 2024</p>
+                {comments.map(comment => (
+                    <div className='flex flex-col gap-1'>
+                        <div className='flex gap-2'>
+                            <img className='h-7 aspect-square rounded-full object-cover my-auto' src={comment.user.image} alt="comment image" />
+                            <div >
+                                <p className='text-sm'>{comment.user.name}</p>
+                                <p className='text-xs text-gray-400'>{comment.createdAt.toString().split("T")[0]}</p>
+                            </div>
                         </div>
+                        <p>{comment.content}</p>
                     </div>
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatibus id quos dicta.</p>
-                </div>
-
-                <div className='flex flex-col gap-1'>
-                    <div className='flex gap-2'>
-                        <img className='h-7 aspect-square rounded-full object-cover my-auto' src="https://www.wearegecko.co.uk/media/50316/mountain-3.jpg" alt="comment image" />
-                        <div >
-                            <p className='text-sm'>Prajwal Gautam</p>
-                            <p className='text-xs text-gray-400'>DEC 4 2024</p>
-                        </div>
-                    </div>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Atque autem repudiandae labore voluptatibus eveniet earum officiis iste vitae at quasi iusto, repellat, hic numquam.</p>
-                </div>
-
-                <div className='flex flex-col gap-1'>
-                    <div className='flex gap-2'>
-                        <img className='h-7 aspect-square rounded-full object-cover my-auto' src="https://www.wearegecko.co.uk/media/50316/mountain-3.jpg" alt="comment image" />
-                        <div >
-                            <p className='text-sm'>Ganesh Dahal</p>
-                            <p className='text-xs text-gray-400'>DEC 4 2024</p>
-                        </div>
-                    </div>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error, deserunt? Deleniti, vel veniam itaque quibusdam ipsam animi.</p>
-                </div>
+                ))}
             </div>
         </div>
     )

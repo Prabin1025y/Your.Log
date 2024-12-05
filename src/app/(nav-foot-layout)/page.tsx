@@ -1,12 +1,21 @@
 import Intro from "@/components/Landing/Intro";
 import PostsContainer from "@/components/Landing/PostsContainer";
-import Image from "next/image";
 
-export default function Home() {
+interface HomeProps {
+  searchParams: {
+    page: string;
+    cat: string;
+  };
+}
+
+export default async function Home({ searchParams }: HomeProps) {
+  const params = await searchParams;
+  const page = parseInt(params.page) || 1;
+  const { cat } = await searchParams;
   return (
     <div>
       <Intro />
-      <PostsContainer />
+      <PostsContainer page={page} cat={cat} />
     </div>
   );
 }
